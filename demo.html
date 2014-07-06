@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>timer Demo</title>
+
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="timer.html">
+
+</head>
+<body unresolved>
+
+  <audio preload="auto" id="bell"> 
+    <source src="SingingBowl1.ogg"/>
+  </audio>
+
+  <pcomans-timer id="timer" duration=10000 repeat onFinish="document.getElementById('bell').play()"></pcomans-timer>
+  
+  <button onclick="document.getElementById('timer').start()">Start the timer</button>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+    <timer></timer>
+
+@element timer
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://pcomans.github.io/timer
+-->
+<polymer-element name="pcomans-timer" attributes="duration repeat onFinish">
+
+  <template>
+
+    <link rel="stylesheet" href="timer.css" />
+
+    <content></content>
+
+  </template>
+
+  <script>
+
+    Polymer('pcomans-timer', {
+      /**
+       * The `noevent` event is not actually fired from here,
+       * we document it as an example of documenting events.
+       *
+       * @event noevent
+       */
+
+      /**
+       * The timer duration in ms
+       *
+       * @attribute notitle
+       * @type string
+       */
+      duration: 1000,
+      repeat: false,
+
+      /**
+       * The `task` method does no work at this time.
+       *
+       * @method task
+       */
+      finished: function(f) {
+        this.running = false;
+        
+        if(this.onFinish) {
+          eval(this.onFinish);
+        }
+        
+        if (this.repeat) {
+          this.start();
+        }
+      },
+       
+      start: function(f) {
+          if (!this.running) {
+              this.startDate = Date.now();
+              this.running = true;
+              
+              window.setTimeout(this.finished.bind(this), this.duration);
+          }
+      },
+      
+      elapsed: function() {
+          if (this.running) {
+              return(Date.now() - this.startDate);
+          }
+      }
+
+    });
+
+  </script>
+
+</polymer-element>
