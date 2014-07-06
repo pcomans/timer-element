@@ -5,16 +5,16 @@
   <title>timer Demo</title>
 
   <script src="../platform/platform.js"></script>
-  <link rel="import" href="timer.html">
+  <link rel="import" href="timer-element.html">
 
 </head>
 <body unresolved>
 
   <audio preload="auto" id="bell"> 
-    <source src="SingingBowl1.ogg"/>
+    <source src="http://upload.wikimedia.org/wikipedia/commons/2/25/SingingBowl1.ogg"/>
   </audio>
 
-  <pcomans-timer id="timer" duration=10000 repeat onFinish="document.getElementById('bell').play()"></pcomans-timer>
+  <timer-element id="timer" duration=10000 repeat onFinish="document.getElementById('bell').play()"></pcomans-timer>
   
   <button onclick="document.getElementById('timer').start()">Start the timer</button>
 
