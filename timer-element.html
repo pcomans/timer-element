@@ -12,11 +12,9 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://pcomans.github.io/timer-element
 -->
-<polymer-element name="timer-element" attributes="duration repeat onFinish">
+<polymer-element name="timer-element" attributes="duration repeat">
 
   <template>
-
-    <link rel="stylesheet" href="timer.css" />
 
     <content></content>
 
@@ -26,10 +24,9 @@ Element providing solution to no problem in particular.
 
     Polymer('timer-element', {
       /**
-       * The `noevent` event is not actually fired from here,
-       * we document it as an example of documenting events.
+       * Triggered when the timer is finished
        *
-       * @event noevent
+       * @event finished
        */
 
       /**
@@ -49,9 +46,7 @@ Element providing solution to no problem in particular.
       finished: function(f) {
         this.running = false;
         
-        if(this.onFinish) {
-          eval(this.onFinish);
-        }
+        this.fire('finished');
         
         if (this.repeat) {
           this.start();
@@ -60,10 +55,11 @@ Element providing solution to no problem in particular.
        
       start: function(f) {
           if (!this.running) {
+              console.log('Setting timer to ' + this.duration + ' ms');
               this.startDate = Date.now();
               this.running = true;
               
-              window.setTimeout(this.finished.bind(this), this.duration);
+              this.job('timer', this.finished, this.duration);
           }
       },
       
